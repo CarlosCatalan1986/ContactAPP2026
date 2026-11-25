@@ -1,4 +1,4 @@
 # Changelog
 
 ## [Unreleased]
-- Estructura inicial del proyecto P-C6E9D1.
+- ContactAPP: PWA de tarjeta de contacto con QR.
