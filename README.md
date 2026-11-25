@@ -1,28 +1,30 @@
-# App ContactAPP
+# ContactAPP
 
-> Proyecto **P-C6E9D1** generado por la Oficina Virtual Multi-Agente.
+> Proyecto **P-C6E9D1** de la Oficina Virtual Multi-Agente.
 > Misión: Necesito que me puedas desarrollar una aplicación para Android donde pueda enviar mis datos como contacto y se puedan guardar esta información en mi celular sin necesidad de tener la misma aplicación, solores corporativos negro y morado más necesito que crees un logo corporativo
 
-Entidades del dominio: **Item**.
+App móvil instalable en Android (PWA) para **compartir tus datos de contacto con un QR**:
 
-## Estructura
-```
-backend/   FastAPI + servicios de dominio + tests (unittest)
-frontend/  React + Vite (consume VITE_BACKEND_URL)
-docs/      arquitectura, plan, seguridad e informe de QA
-```
+| Modo | Qué hace quien recibe |
+|---|---|
+| QR directo (vCard) | Escanea con la cámara → «Agregar contacto». Sin internet y **sin instalar nada**. |
+| QR con enlace | Abre una página con tu tarjeta y el botón «Guardar en mis contactos» (.vcf). |
+| Compartir .vcf | Envía el archivo por WhatsApp, correo o Bluetooth (hoja nativa de Android). |
 
-## Ejecutar en local
+Tus datos se guardan sólo en tu teléfono; el enlace lleva la tarjeta dentro de la URL (`#c=…`) y no pasa por ningún servidor.
+Colores corporativos: morado, negro · Logo: `frontend/public/logo.svg`.
+
+## Ejecutar
 ```bash
-# Backend
-cd backend && python -m venv .venv && . .venv/Scripts/activate   # Linux/macOS: . .venv/bin/activate
-pip install -r requirements.txt
-python -m unittest discover -s tests -v
-uvicorn main:app --reload --port 8000
-
-# Frontend
-cd frontend && npm install && npm run dev
+cd frontend
+npm install
+npm test        # pruebas de vCard, validaciones y enlace (node --test)
+npm run dev     # http://localhost:5173
+npm run build   # genera dist/ (estático)
 ```
 
-## Flujo
-Análisis → Desarrollo (rama `develop`) → QA → aprobación del responsable → merge a `main` + tag → push.
+## Instalar en Android
+Abrir la URL publicada en Chrome → menú ⋮ → **Instalar app** / Agregar a la pantalla principal.
+
+## Publicar gratis (Vercel)
+Vercel → Add New Project → este repo → **Root Directory: `frontend`** (preset Vite). No requiere backend ni variables de entorno.
